@@ -17,7 +17,7 @@ jobs:
         with:
           targets: wasm32-unknown-unknown
 
-      - name: Install Trunk & Build
+      - name: Install Trunk & Build Web
         run: |
           cargo install --locked trunk
           cd apps/photocraft-web
@@ -27,4 +27,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: photocraft-web-dist
-          path: apps/photocraft-web/dist
+          path: dist/web
