@@ -1,0 +1,30 @@
+name: Build PhotoCraft Web Bundle
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Rust target
+        run: rustup target add wasm32-unknown-unknown
+
+      - name: Install Trunk
+        uses: jetli/trunk-action@v0.16.0
+
+      - name: Build with Trunk
+        working-directory: apps/photocraft-web
+        run: trunk build --release
+
+      - name: Upload Web Dist Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: photocraft-web-dist
+          path: apps/photocraft-web/dist
+          
