@@ -18,9 +18,12 @@ jobs:
       - name: Install Trunk
         uses: jetli/trunk-action@v0.5.1
 
+      - name: List files to check structure
+        run: find . -maxdepth 3
+
       - name: Build with Trunk
         working-directory: apps/photocraft-web
-        run: trunk build --release
+        run: trunk build --release index.html
 
       - name: Upload Web Dist Artifact
         uses: actions/upload-artifact@v4
