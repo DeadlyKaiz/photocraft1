@@ -17,12 +17,9 @@ jobs:
         with:
           targets: wasm32-unknown-unknown
 
-      - name: Install Trunk
-        uses: jetli/trunk-action@v0.21.14
-
-      - name: Build Web Bundle
+      - name: Install Trunk & Build
         run: |
-          cargo install wasm-opt || true
+          cargo install --locked trunk
           cd apps/photocraft-web
           trunk build --release
 
