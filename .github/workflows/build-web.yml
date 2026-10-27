@@ -12,15 +12,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Rust target
-        run: rustup target add wasm32-unknown-unknown
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
 
       - name: Install Trunk
-        uses: jetli/trunk-action@v0.5.1
+        uses: jetli/trunk-action@v0.21.14
 
-      - name: Build with Trunk
-        working-directory: apps/photocraft-web
-        run: trunk build index.html --release
+      - name: Build Web Bundle
+        run: |
+          cargo install wasm-opt || true
+          cd apps/photocraft-web
+          trunk build --release
 
       - name: Upload Web Dist Artifact
         uses: actions/upload-artifact@v4
