@@ -16,7 +16,7 @@ jobs:
         run: rustup target add wasm32-unknown-unknown
 
       - name: Install Trunk
-        uses: jetli/trunk-action@v0.16.0
+        uses: jetli/trunk-action@v0.5.1
 
       - name: Build with Trunk
         working-directory: apps/photocraft-web
@@ -27,4 +27,3 @@ jobs:
         with:
           name: photocraft-web-dist
           path: apps/photocraft-web/dist
-          
